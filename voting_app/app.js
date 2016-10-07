@@ -31,12 +31,32 @@ const Product = React.createClass({
 });
 
 const ProductList = React.createClass({
-  handleProductUpVote: function (productId) {
-    console.log(productId + " was voted.")
+  getInitialState: function () {
+    return {
+      products: []
+    };
   },
+  componentDidMount: function () {
+    this.updateState();
+  },
+  updateState: function () {
+    const products = Data.sort((a, b) => {
+      return b.votes - a.votes;
+    });
+    this.setState({ products: products });
+  },
+  handleProductUpVote: function (productId) {
+    Data.forEach((el) => {
+      if(el.id === productId) {
+        el.votes = el.votes + 1;
+        return;
+      }
+    })
 
+    this.updateState();
+  },
   render: function () {
-    const products = Data.map((product) => {
+    const products = this.state.products.map((product) => {
       return(
         <Product
           key                  = { 'product-' + product.id }
