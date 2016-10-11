@@ -19,3 +19,4 @@ npm run server
 The server is now running at [localhost:3000](localhost:3000)
 
 10/OCT/2016 .............................................. PAG 58
+11/OCT/2016 .............................................. PAG 61
